@@ -1,0 +1,15 @@
+{
+    /*
+     * Possible values:
+     * - the name of a built-in config
+     * - the name of an NPM module which has a "main" file that exports a config object
+     * - a relative path to a JSON file
+     */
+    "extends": "tslint:latest",
+    "rules": {
+        "quotemark": [true, "single", "avoid-escape"],
+        "max-line-length": [false],
+        "trailing-comma": [false]
+    },
+    "rulesDirectory": []
+}
