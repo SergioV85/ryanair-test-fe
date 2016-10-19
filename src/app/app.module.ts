@@ -1,23 +1,34 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule }  from '@angular/platform-browser';
 
-import { Airports } from './data/airports.service';
-import { CitySelector } from './modules/module.destination-selector';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
+import { CityComponent } from './modules/module.city-component';
+
+import { ApiData } from './data/api.service';
+import { ArrivalSelector, DepartureSelector } from './modules/module.city-selector';
+import { PossibleCity } from './modules/module.possible-city';
 
 @NgModule({
-    bootstrap: [
-        CitySelector
-    ],
+    bootstrap: [CityComponent],
     declarations: [
-        CitySelector
+        DepartureSelector,
+        ArrivalSelector,
+        PossibleCity,
+        CityComponent
     ],
     imports: [
         BrowserModule,
-        HttpModule
+        HttpModule,
+        Ng2AutoCompleteModule,
     ],
     providers: [
-        Airports
-    ]
+        ApiData
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+    public arrival: boolean = false;
+    public departure: boolean = true;
+}

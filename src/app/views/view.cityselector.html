@@ -1,5 +1,4 @@
 <main>
-    <div>Cities: {{ cities }}</div>
-    <div>Countries: {{ countries }}</div>
-    <div>Routes: {{ routes }}</div>
+    <h4>{{ title }}</h4>
+    <input [(ngModel)]="selectedCity" auto-complete [source]="cities" value-property-name="key" display-property-name="name" (valueChanged)="selectCity($event)" />
 </main>

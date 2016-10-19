@@ -1,0 +1,9 @@
+input {
+    color: #666;
+    font-size: large;
+    width: 300px;
+}
+
+ul {
+    max-height: 500px;
+}
