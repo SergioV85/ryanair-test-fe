@@ -7,6 +7,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { CityComponent } from './modules/module.city-component';
 
 import { ApiData } from './data/api.service';
+import { ConvertedData } from './data/data.transform.service';
 import { ArrivalSelector, DepartureSelector } from './modules/module.city-selector';
 import { PossibleCity } from './modules/module.possible-city';
 
@@ -24,7 +25,8 @@ import { PossibleCity } from './modules/module.possible-city';
         Ng2AutoCompleteModule,
     ],
     providers: [
-        ApiData
+        ApiData,
+        ConvertedData
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

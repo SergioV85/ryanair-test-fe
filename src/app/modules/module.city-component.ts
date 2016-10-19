@@ -1,8 +1,7 @@
 import '../../../public/css/styles.css';
 import { Component, OnInit } from '@angular/core';
 
-import { ApiData } from './../data/api.service';
-import { ConvertData } from './../data/data.transform.service';
+import { ConvertedData } from './../data/data.transform.service';
 
 @Component({
     selector: 'city-selector',
@@ -22,16 +21,11 @@ export class CityComponent implements OnInit {
     private departureCode: string;
     private isArrivalSelect: boolean = false;
     private isDepartureSelect: boolean = false;
-    private routes: Ryanair.Routes;
     private possibleRoutes: Array<string> = [];
 
-    constructor(private airports: ApiData) { }
+    constructor(private convertedData: ConvertedData) { }
 
-    public ngOnInit() {
-        this.airports.RawData.subscribe(
-            data => this.routes = data.routes
-        );
-    }
+    public ngOnInit() {}
 
     private citySelect(value: Ryanair.CitySelection, target: string) {
         if (value !== null && value !== undefined) {
@@ -43,7 +37,7 @@ export class CityComponent implements OnInit {
                 this.isDepartureSelect = true;
                 this.departureCode = value.key;
                 this.departureCity = value.name;
-                this.possibleRoutes = ConvertData.getRoutes(this.departureCode, this.routes);
+                this.possibleRoutes = this.convertedData.getRoutes(this.departureCode);
             }
         }
     }

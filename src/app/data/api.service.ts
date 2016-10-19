@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { AsyncSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ApiData {
-    public RawData: Observable<Ryanair.GlobalData>;
+    public ServerData: AsyncSubject<any>;
     private airportsUrl: string;
 
     constructor(private http: Http) {
         this.airportsUrl = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/';
         this.requestServerData();
+        this.ServerData = new AsyncSubject();
     }
+
     private requestServerData() {
-        this.RawData = this.http
+        this.http
             .get(this.airportsUrl)
             .map(this.parseData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .subscribe(
+                data => {
+                    this.ServerData.next(data);
+                    this.ServerData.complete();
+                }
+            );
     }
     private parseData(res: Response) {
         return res.json();

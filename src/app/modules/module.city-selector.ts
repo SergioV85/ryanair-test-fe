@@ -1,26 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-import { ApiData } from './../data/api.service';
-import { ConvertData } from './../data/data.transform.service';
+import { ConvertedData } from './../data/data.transform.service';
+
+class CitySelector implements OnInit {
+    public selectedCity: string;
+    public title: string;
+    private cities: Array<Ryanair.CitySelection>;
+
+    constructor(public convertedData: ConvertedData) { }
+
+    public ngOnInit() {
+        this.convertedData.Airports.subscribe(
+            (data: Array<Ryanair.CitySelection>) => this.cities = data
+        );
+    }
+}
 
 @Component({
     selector: 'departure-selector',
     styleUrls: ['./../views/view.cityselector.css'],
     templateUrl: './../views/view.cityselector.html',
 })
-export class DepartureSelector implements OnInit {
+export class DepartureSelector extends CitySelector {
     @Output() public onChange = new EventEmitter<Ryanair.CitySelection>();
-    public selectedCity: string;
-    private cities: Array<{}>;
-    private title: string;
 
-    constructor(private airports: ApiData) { }
-
-    public ngOnInit() {
-        this.airports.RawData.subscribe(
-            data => this.cities = ConvertData.convertCities(data.airports)
-        );
-        this.title = 'Departure City';
+    constructor(public convertedData: ConvertedData) {
+        super(convertedData);
+        this.title = 'Departure Airport';
     }
 
     public selectCity(value: Ryanair.CitySelection) {
@@ -33,21 +39,13 @@ export class DepartureSelector implements OnInit {
     styleUrls: ['./../views/view.cityselector.css'],
     templateUrl: './../views/view.cityselector.html',
 })
-export class ArrivalSelector implements OnInit {
-    @Input('directCity') public selectedCity: any;
+export class ArrivalSelector extends CitySelector {
     @Output() public onChange = new EventEmitter<Ryanair.CitySelection>();
-    private cities: Array<{}>;
-    private title: string;
-
-    constructor(private airports: ApiData) { }
-
-    public ngOnInit() {
-        this.airports.RawData.subscribe(
-            data => this.cities = ConvertData.convertCities(data.airports)
-        );
-        this.title = 'Arrival City';
+    @Input('directCity') public selectedCity: any;
+    constructor(public convertedData: ConvertedData) {
+        super(convertedData);
+        this.title = 'Arrival Airport';
     }
-
     public selectCity(value: Ryanair.CitySelection) {
         this.onChange.emit(value);
     }
