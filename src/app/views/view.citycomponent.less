@@ -1,8 +1,71 @@
-.city-component {
-    margin: 10px 20%;
-    width: 60%;
+@import "../../../public/css/variables";
+
+flight-parameters {
+    display: block;
+    margin: 20px auto 0;
+    width: 90%;
 }
 
-.suggested-box {
-    width: 20%;
+.airport-selector {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0 15px;
+    padding: 0 2%;
+    vertical-align: top;
+    width: calc(~'49% - 30px');
+
+}
+
+.possible-cities {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    &-title {
+        color: @baseColor;
+        text-align: center;
+    }
+
+    &-city {
+        background-color: @lightColor;
+        border-radius: 3px;
+        border: 1px solid @baseColor;
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 2px 5px;
+        padding: 3px;
+    }
+}
+
+.day-selector {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 30px 15px;
+    padding: 0 2%;
+    vertical-align: top;
+    width: calc(~'49% - 30px');
+
+}
+
+.search-button {
+    margin: 10px auto;
+}
+
+.possible-flights {
+    display: block;
+    margin: 20px auto 0;
+    width: 90%;
+
+    &-title {
+        color: @baseColor;
+        text-align: center;
+    }
+
+    &-flight {
+        &:first-child {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+    }
 }

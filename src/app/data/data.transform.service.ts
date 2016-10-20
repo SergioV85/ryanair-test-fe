@@ -7,16 +7,32 @@ import { ApiData } from './../data/api.service';
 export class ConvertedData {
     public Airports: ReplaySubject<any> = new ReplaySubject(1);
     public Routes: ReplaySubject<any> = new ReplaySubject(1);
+    private cities: Array<Ryanair.Airport>;
+    private convertedCities: {};
     private routes: Ryanair.Routes;
     constructor(private airports: ApiData) {
         this.init();
     }
 
     public getRoutes(departureCity: string) {
-        return this.routes[departureCity];
+        return this.routes[departureCity].map((airportCode) => { 
+            return {
+                code: airportCode,
+                name: this.convertedCities[airportCode]
+            };
+        });
     }
-    private convertCities(cities: Array<Ryanair.Airport>): Array<{}> {
-        const airports = cities.map((airport: Ryanair.Airport) => {
+    public getFlights(departure: string, arrival: string, departureDate: string, arrivalDate?: string) {
+        return this.airports.searchFlight(departure, arrival, departureDate, arrivalDate);
+    }
+    private prepareAirportsForRoutes() {
+        this.convertedCities = this.cities.reduce((obj, elem) => {
+            obj[elem.iataCode] = `${elem.name} (${elem.country.name})`;
+            return obj;
+        }, {});
+    }
+    private get airportsForSelect(): Array<{}> {
+        const airports = this.cities.map((airport: Ryanair.Airport) => {
             return {
                 code: airport.iataCode,
                 name: `${airport.name} (${airport.country.name})`,
@@ -27,8 +43,9 @@ export class ConvertedData {
     private init() {
         this.airports.ServerData.subscribe(
             (data: Ryanair.GlobalData) => {
-                const cities = this.convertCities(data.airports);
-                this.Airports.next(cities);
+                this.cities = data.airports;
+                this.Airports.next(this.airportsForSelect);
+                this.prepareAirportsForRoutes();
 
                 this.routes = data.routes;
                 this.Routes.next(data.routes);

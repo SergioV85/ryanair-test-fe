@@ -53,6 +53,13 @@ declare namespace Ryanair {
         percentage: number;
     }
 
+    interface Flight {
+        currency: string;
+        dateFrom: string;
+        dateTo: string;
+        price: number;
+    }
+
     interface Routes {
         [key: string]: Array<string>;
     }

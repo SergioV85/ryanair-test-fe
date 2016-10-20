@@ -7,11 +7,21 @@ import { Observable } from 'rxjs/Observable';
 export class ApiData {
     public ServerData: AsyncSubject<any>;
     private airportsUrl: string;
+    private baseUrl = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/';
+    private flightUrl: string;
 
     constructor(private http: Http) {
-        this.airportsUrl = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/';
+        this.airportsUrl = `${this.baseUrl}forms/flight-booking-selector/`;
+        this.flightUrl = `${this.baseUrl}flights`;
         this.requestServerData();
         this.ServerData = new AsyncSubject();
+    }
+
+    public searchFlight(departure: string, arrival: string, departureDate: string, arrivalDate?: string) {
+        return this.http
+                .get(`${this.flightUrl}/from/${departure}/to/${arrival}/${departureDate}/${arrivalDate}/250/unique/?limit=15&offset-0`)
+                .map(this.parseData)
+                .catch(this.handleError);
     }
 
     private requestServerData() {

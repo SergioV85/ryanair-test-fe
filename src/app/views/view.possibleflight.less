@@ -1,0 +1,48 @@
+@import "../../../public/css/variables";
+
+.flight {
+    background-color: @lightColor;
+    border-radius: 10px;
+    border: 2px solid @baseColor;
+    color: #fff;
+    display: block;
+    min-height: 50px;
+    margin: 10px 5%;
+    width: 90%;
+
+    &-departure,
+    &-arrival {
+        margin: 5px 0;
+    }
+
+    .label {
+        color: #dedede;
+        width: 100px;
+    }
+
+    .date {
+        margin-right: 20px;
+    }
+
+    &-price {
+        color: @alternativeColor;        
+        font-size: 36px;
+        line-height: 50px;
+        padding-right: 10px;
+        text-align: right;
+    }
+
+    &:hover {
+        background-color: @alternativeColor;
+        color: @baseColor;
+
+        .label {
+            color: @lightColor;
+        }
+
+
+        .flight-price {
+            color: @baseColor;   
+        }
+    }    
+}

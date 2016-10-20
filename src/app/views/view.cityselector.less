@@ -1,11 +1,6 @@
 @import "../../../public/css/variables";
 
-.airport-selector {
-    position: relative;
-    width: 100%;
-}
-
-h4 {
+.airport-selector-title {
     color: @baseColor;
     text-align: center;
 }
@@ -18,11 +13,46 @@ h4 {
         font-size: large;
         width: 100%;
 
+        &::-webkit-input-placeholder {
+            color: @lightColor;
+        }
+        &:-moz-placeholder {
+            color: @lightColor;
+        }
+        &::-moz-placeholder {
+            color: @lightColor;
+        }
+        &:-ms-input-placeholder {
+            color: @lightColor;
+        }
+
         &:focus {
             border-bottom: 2px solid @alternativeColor;
             color: @baseColor;
             outline: 0;
         }
+
+        &:disabled {
+            background-color: transparent;
+            border-bottom: 1px solid #ccc;
+            color: #aaa;
+            cursor: block;
+
+            &::-webkit-input-placeholder {
+                color: #aaa;
+            }
+            &:-moz-placeholder {
+                color: #aaa;
+            }
+            &::-moz-placeholder {
+                color: #aaa;
+            }
+            &:-ms-input-placeholder {
+                color: #aaa;
+            }
+        }
+
+            
     }
 
     &-dropdown {
