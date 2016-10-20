@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'possible-city',
-    template: `<a (click)="selectCity(cityName)" href="javascript:;">{{ cityName }}</a> `,
+    styleUrls: ['./../views/view.possiblecity.less'],
+    templateUrl: './../views/view.possiblecity.html',
 })
 export class PossibleCity implements OnInit {
     @Input('city') public cityName: string;

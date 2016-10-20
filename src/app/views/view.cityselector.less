@@ -1,0 +1,65 @@
+@import "../../../public/css/variables";
+
+.airport-selector {
+    position: relative;
+    width: 100%;
+}
+
+h4 {
+    color: @baseColor;
+    text-align: center;
+}
+
+.completer {
+    &-input {
+        border: 0;
+        border-bottom: 1px solid @baseColor;
+        color: @baseColor;
+        font-size: large;
+        width: 100%;
+
+        &:focus {
+            border-bottom: 2px solid @alternativeColor;
+            color: @baseColor;
+            outline: 0;
+        }
+    }
+
+    &-dropdown {
+        box-sizing: border-box;
+        max-height: 300px;
+        margin-top: 10px !important;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative !important;
+        width: 100% !important;
+
+        &-holder {
+            box-sizing: border-box;
+            width: 100% !important;
+        }
+    }
+    
+    &-row {
+        color: @lightColor !important;
+    }
+    &-selected {
+        &-row {
+            background-color: transparent !important;
+            color: @baseColor !important;
+        }
+    }
+
+    &-holder {}
+    &-image {
+        &-default {}
+        &-holder {}
+    }
+    &-title {}
+    &-searching {}
+    &-no-results {}
+    &-description {}
+    &-list-item {
+        &-holder{}
+    }
+}

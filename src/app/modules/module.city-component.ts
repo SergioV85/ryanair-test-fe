@@ -5,13 +5,8 @@ import { ConvertedData } from './../data/data.transform.service';
 
 @Component({
     selector: 'city-selector',
-    template: `
-      <departure-selector (onChange)="citySelect($event, 'departure')"></departure-selector>
-      <p [hidden]="!isDepartureSelect">Direct flights from {{ departureCity }}: </p>
-      <possible-city *ngFor="let city of possibleRoutes" [city]=city (citySelect)="directSelect($event)"></possible-city>
-      <arrival-selector [hidden]="!isDepartureSelect" (onChange)="citySelect($event, 'arrival')" [directCity]="directFlight"></arrival-selector>
-      <p [hidden]="!isArrivalSelect">Selected arrival city is {{ arrivalCity }}</p>
-    `,
+    styleUrls: ['./../views/view.citycomponent.less'],
+    templateUrl: './../views/view.citycomponent.html',
 })
 export class CityComponent implements OnInit {
     public directFlight: string;
@@ -22,6 +17,7 @@ export class CityComponent implements OnInit {
     private isArrivalSelect: boolean = false;
     private isDepartureSelect: boolean = false;
     private possibleRoutes: Array<string> = [];
+    private mainTile: number = 4;
 
     constructor(private convertedData: ConvertedData) { }
 
@@ -31,12 +27,13 @@ export class CityComponent implements OnInit {
         if (value !== null && value !== undefined) {
             if (target === 'arrival') {
                 this.isArrivalSelect = true;
-                this.arrivalCode = value.key;
-                this.arrivalCity = value.name;
+                this.arrivalCode = value.originalObject.code;
+                this.arrivalCity = value.title;
             } else {
                 this.isDepartureSelect = true;
-                this.departureCode = value.key;
-                this.departureCity = value.name;
+                this.mainTile = 3;
+                this.departureCode = value.originalObject.code;
+                this.departureCity = value.title;
                 this.possibleRoutes = this.convertedData.getRoutes(this.departureCode);
             }
         }

@@ -36,6 +36,11 @@ module.exports = {
                 test: /\.css$/,
                 include: helpers.root('src', 'app'),
                 loader: 'raw'
+            },
+            {
+                test: /\.less$/,
+                exclude: /node_modules/,
+                loaders: ["raw-loader", "less-loader"]
             }
         ]
     },

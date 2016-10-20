@@ -1,8 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
 import { BrowserModule }  from '@angular/platform-browser';
 
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 import { CityComponent } from './modules/module.city-component';
 
@@ -23,6 +25,8 @@ import { PossibleCity } from './modules/module.possible-city';
         BrowserModule,
         HttpModule,
         Ng2AutoCompleteModule,
+        Ng2CompleterModule,
+        MaterialModule.forRoot()
     ],
     providers: [
         ApiData,

@@ -28,8 +28,13 @@ declare namespace Ryanair {
     }
 
     interface CitySelection {
-        key: string;
-        name: string;
+        desription: string;
+        image: string;
+        originalObject: {
+            code: string;
+            name: string;            
+        }
+        title: string;
     }
 
     interface Country {

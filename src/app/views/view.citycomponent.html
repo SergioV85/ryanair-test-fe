@@ -1,0 +1,31 @@
+<md-grid-list cols="4" class="city-component">
+    <md-grid-tile colspan="{{ mainTile }}">
+        <departure-selector 
+            class="airport-selector"
+            [ngClass]="{'suggested-box-exist': isDepartureSelect}" 
+            (onChange)="citySelect($event, 'departure')"
+            >
+        </departure-selector>
+    </md-grid-tile>
+    <md-grid-tile *ngIf="isDepartureSelect" colspan="1">
+        <main class="possible-city-block">
+            <h5> Direct flights from {{ departureCity }}: </h5>
+            <possible-city *ngFor="let city of possibleRoutes"
+                    [city]=city 
+                    (citySelect)="directSelect($event)"
+                >
+            </possible-city>
+        </main>
+    </md-grid-tile>        
+    <md-grid-tile *ngIf="isDepartureSelect" colspan="mainTile">
+        <arrival-selector 
+            class="airport-selector"
+            [ngClass]="{'suggested-box-exist': isDepartureSelect}" 
+            [hidden]="!isDepartureSelect" 
+            (onChange)="citySelect($event, 'arrival')" 
+            [directCity]="directFlight"
+            >
+        </arrival-selector>
+    </md-grid-tile>
+
+</md-grid-list>

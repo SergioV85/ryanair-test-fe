@@ -1,4 +1,5 @@
 <main>
     <h4>{{ title }}</h4>
-    <input [(ngModel)]="selectedCity" auto-complete [source]="cities" value-property-name="key" display-property-name="name" (valueChanged)="selectCity($event)" />
+    <!--input [(ngModel)]="selectedCity" auto-complete [source]="cities" value-property-name="code" display-property-name="name" (valueChanged)="selectCity($event)" /-->
+    <ng2-completer [(ngModel)]="selectedCity" [dataService]="dataService" [minSearchLength]="0" (selected)="selectCity($event)" placeholder="Select airport"></ng2-completer>
 </main>

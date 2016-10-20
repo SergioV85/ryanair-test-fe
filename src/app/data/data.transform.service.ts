@@ -15,10 +15,10 @@ export class ConvertedData {
     public getRoutes(departureCity: string) {
         return this.routes[departureCity];
     }
-    private convertCities(cities: Array<Ryanair.Airport>): Array<Ryanair.CitySelection> {
+    private convertCities(cities: Array<Ryanair.Airport>): Array<{}> {
         const airports = cities.map((airport: Ryanair.Airport) => {
             return {
-                key: airport.iataCode,
+                code: airport.iataCode,
                 name: `${airport.name} (${airport.country.name})`,
             };
         });
