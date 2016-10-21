@@ -1,0 +1,28 @@
+@import "../../../public/css/variables";
+
+flight-parameters {
+    display: block;
+    margin: 20px auto 0;
+    width: 90%;
+}
+
+.possible-cities {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    &-title {
+        color: @baseColor;
+        text-align: center;
+    }
+
+    &-city {
+        background-color: @lightColor;
+        border-radius: 3px;
+        border: 1px solid @baseColor;
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 2px 5px;
+        padding: 3px;
+    }
+}

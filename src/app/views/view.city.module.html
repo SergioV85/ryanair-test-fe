@@ -1,0 +1,21 @@
+<flight-parameters *ngIf="!gotFlights">
+    <div class="btn-group row">
+        <label class="btn btn-success" [(ngModel)]="twoWayTicket" btnRadio="true" ngDefaultControl>Two-way ticket</label>
+        <label class="btn btn-success" [(ngModel)]="twoWayTicket" btnRadio="false" ngDefaultControl>One-way ticket</label>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <departure-selector class="airport-selector" (onChange)="selectEvent($event, 'departure')" [departureCity]="departureCity">
+            </departure-selector>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <arrival-selector class="airport-selector" [departureSelect]="!isDepartureSelect" (onChange)="selectEvent($event, 'arrival')" [directCity]="arrivalCity">
+            </arrival-selector>
+        </div>
+    </div>
+    <possible-routes *ngIf="possibleRoutesisShown" class="possible-cities">
+        <h5 class="possible-cities-title"> Direct flights from {{ departureCity }}: </h5>
+        <possible-city *ngFor="let city of possibleRoutes" class="possible-cities-city" [city]=city (citySelect)="directSelect($event)">
+        </possible-city>
+    </possible-routes>
+</flight-parameters>

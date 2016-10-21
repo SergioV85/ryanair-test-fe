@@ -1,4 +1,4 @@
-@import "../../../public/css/variables";
+@import "../../../../public/css/variables";
 
 .airport-selector-title {
     color: @baseColor;
@@ -9,21 +9,22 @@
     &-input {
         border: 0;
         border-bottom: 1px solid @baseColor;
-        color: @baseColor;
+        color: @lightColor;
         font-size: large;
+        text-align: center;
         width: 100%;
 
         &::-webkit-input-placeholder {
-            color: @lightColor;
+            color: lighten(@lightColor, 20);
         }
         &:-moz-placeholder {
-            color: @lightColor;
+            color: lighten(@lightColor, 20);
         }
         &::-moz-placeholder {
-            color: @lightColor;
+            color: lighten(@lightColor, 20);
         }
         &:-ms-input-placeholder {
-            color: @lightColor;
+            color: lighten(@lightColor, 20);
         }
 
         &:focus {

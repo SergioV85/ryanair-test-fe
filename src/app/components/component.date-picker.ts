@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
+import { Component } from '@angular/core';
 import * as moment from 'moment';
 
 class Datepicker {
@@ -39,8 +39,8 @@ class Datepicker {
 
 @Component({
     selector: 'departure-date-picker',
-    styleUrls: ['./../views/view.datepicker.less'],
-    templateUrl: './../views/view.datepicker.html',
+    styleUrls: ['./../views/components/view.datepicker.less'],
+    templateUrl: './../views/components/view.datepicker.html',
 })
 export class DepartureDatepicker extends Datepicker {
     constructor() {
@@ -50,8 +50,8 @@ export class DepartureDatepicker extends Datepicker {
 
 @Component({
     selector: 'arrival-date-picker',
-    styleUrls: ['./../views/view.datepicker.less'],
-    templateUrl: './../views/view.datepicker.html',
+    styleUrls: ['./../views/components/view.datepicker.less'],
+    templateUrl: './../views/components/view.datepicker.html',
 })
 export class ArrivalDatepicker extends Datepicker {
     constructor() {

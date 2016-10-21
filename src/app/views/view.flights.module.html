@@ -1,0 +1,10 @@
+<possible-to-flights *ngIf="gotFlights" class="possible-flights">
+    <h4 class="possible-flights-title"> Found next flight from {{ departureCity }} to {{ arrivalCity }}</h4>
+    <possible-to-flight *ngFor="let flight of possibleToFlights" class="possible-flights-flight" [flight]=flight>
+    </possible-to-flight>
+</possible-to-flights>
+<possible-from-flights *ngIf="gotFlights && twoWayTicket" class="possible-flights">
+    <h4 class="possible-flights-title"> Found next flight from {{ arrivalCity }} to {{ departureCity }}</h4>
+    <possible-from-flight *ngFor="let flight of possibleFromFlights" class="possible-flights-flight" [flight]=flight>
+    </possible-from-flight>
+</possible-from-flights>

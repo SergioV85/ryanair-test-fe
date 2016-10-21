@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import { CompleterService, CompleterData } from 'ng2-completer';
+import { CompleterData, CompleterService } from 'ng2-completer';
 
 import { ConvertedData } from './../data/data.transform.service';
 
@@ -25,8 +25,8 @@ class CitySelector implements OnInit {
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'departure-selector',
-    styleUrls: ['./../views/view.cityselector.less'],
-    templateUrl: './../views/view.cityselector.html',
+    styleUrls: ['./../views/components/view.cityselector.less'],
+    templateUrl: './../views/components/view.cityselector.html',
 })
 export class DepartureSelector extends CitySelector {
     @Input('departureCity') public selectedCity: any;
@@ -45,8 +45,8 @@ export class DepartureSelector extends CitySelector {
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'arrival-selector',
-    styleUrls: ['./../views/view.cityselector.less'],
-    templateUrl: './../views/view.cityselector.html',
+    styleUrls: ['./../views/components/view.cityselector.less'],
+    templateUrl: './../views/components/view.cityselector.html',
 })
 export class ArrivalSelector extends CitySelector {
     @Output() public onChange = new EventEmitter<Ryanair.CitySelection>();

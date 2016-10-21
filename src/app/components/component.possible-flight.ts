@@ -4,19 +4,19 @@ import * as moment from 'moment';
 class Flight {
     @Input('flight') public flight: {};
 
-    private getDate(time: string): string {
+    public getDate(time: string): string {
         return moment(time).format('YYYY-MM-DD');
     }
 
-    private getTime(time: string): string {
+    public getTime(time: string): string {
         return moment(time).format('HH:mm');
     }
 }
 
 @Component({
     selector: 'possible-to-flight',
-    styleUrls: ['./../views/view.possibleflight.less'],
-    templateUrl: './../views/view.possibleflight.html',
+    styleUrls: ['./../views/components/view.possibleflight.less'],
+    templateUrl: './../views/components/view.possibleflight.html',
 })
 export class PossibleToFlight extends Flight {
     @Input('flight') public flight: {};
@@ -24,8 +24,8 @@ export class PossibleToFlight extends Flight {
 
 @Component({
     selector: 'possible-from-flight',
-    styleUrls: ['./../views/view.possibleflight.less'],
-    templateUrl: './../views/view.possibleflight.html',
+    styleUrls: ['./../views/components/view.possibleflight.less'],
+    templateUrl: './../views/components/view.possibleflight.html',
 })
 export class PossibleFromFlight extends Flight {
     @Input('flight') public flight: {};

@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'possible-city',
-    styleUrls: ['./../views/view.possiblecity.less'],
-    templateUrl: './../views/view.possiblecity.html',
+    styleUrls: ['./../views/components/view.possiblecity.less'],
+    templateUrl: './../views/components/view.possiblecity.html',
 })
 export class PossibleCity implements OnInit {
     @Input('city') public cityName: string;

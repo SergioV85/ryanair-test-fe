@@ -27,6 +27,11 @@ declare namespace Ryanair {
         name: string;
     }
 
+    interface CityObject {
+        code: string;
+        name: string;
+    }
+
     interface CitySelection {
         desription: string;
         image: string;
