@@ -1,4 +1,3 @@
 <main>
-    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true"></datepicker>
-    <span>{{ date | date:'fullDate'}}</span>
+    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" (selectionDone)="changeDate($event)"></datepicker>
 </main>

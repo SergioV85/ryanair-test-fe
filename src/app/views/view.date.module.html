@@ -1,4 +1,4 @@
-<departure-date-picker class="day-selector" *ngIf="isArrivalSelect" (onChange)="dateSelect($event, 'departure')">
+<departure-date-picker class="day-selector" *ngIf="isArrivalSelect && !showFlights" (departureDate)="dateSelect($event, false)">
 </departure-date-picker>
-<arrival-date-picker class="day-selector" *ngIf="isArrivalSelect && twoWayTicket" (onChange)="dateSelect($event, 'arrival')">
+<arrival-date-picker class="day-selector" *ngIf="isArrivalSelect && twoWayTicket && !showFlights" (arrivalDate)="dateSelect($event, true)">
 </arrival-date-picker>

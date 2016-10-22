@@ -1,5 +1,6 @@
 import '../../../public/css/styles.css';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ShareData } from './../data/data.share.service';
 import { ConvertedData } from './../data/data.transform.service';
@@ -10,20 +11,32 @@ import { ConvertedData } from './../data/data.transform.service';
     templateUrl: './../views/view.city.module.html',
 })
 export class CityComponent {
+    private showFlightSubscription: Subscription;
     private isDepartureSelect: boolean = false;
+    private showFlights: boolean = false;
     private arrivalCity: string;
     private departureCity: string;
     private possibleRoutes: Array<{}> = [];
     private possibleRoutesisShown: boolean = false;
-    private twoWayTicket: boolean = true;
+    private twoWayTicket: string = 'true';
 
-    constructor(private convertedData: ConvertedData, private shareData: ShareData) { }
+    constructor(private convertedData: ConvertedData, private shareData: ShareData) {
+        this.showFlightSubscription = shareData.showFlights.subscribe(
+            state => {
+                this.showFlights = state;
+            }
+        );
 
+    }
+    public changeFlightType(event: boolean) {
+        this.twoWayTicket = event.toString();
+        this.shareData.twoWayChange(event);
+    }
     public directSelect(value: Ryanair.CityObject) {
         this.citySelect(value, true);
     }
     public selectEvent(value: Ryanair.CitySelection, target: string) {
-         if (value !== null && value !== undefined) {
+        if (value !== null && value !== undefined) {
             if (target === 'arrival') {
                 this.citySelect({
                     code: value.originalObject.code,
@@ -50,7 +63,6 @@ export class CityComponent {
             this.shareData.departureAirportSelect(value);
         }
     }
-
     private updateRoutes(code?: string) {
         if (code) {
             this.possibleRoutesisShown = true;

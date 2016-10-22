@@ -14,6 +14,7 @@ import { ConvertedData } from './data/data.transform.service';
 import { CityComponent } from './modules/module.city';
 import { ControlsComponent } from './modules/module.controls';
 import { DateComponent } from './modules/module.date';
+import { FlightsComponent } from './modules/module.flights';
 import { Header } from './modules/module.header';
 
 import { ArrivalSelector, DepartureSelector } from './components/component.city-selector';
@@ -22,7 +23,7 @@ import { PossibleCity } from './components/component.possible-city';
 import { PossibleFromFlight, PossibleToFlight } from './components/component.possible-flight';
 
 @NgModule({
-    bootstrap: [Header, CityComponent, ControlsComponent, DateComponent],
+    bootstrap: [Header, CityComponent, ControlsComponent, DateComponent, FlightsComponent],
     declarations: [
         DepartureSelector,
         ArrivalSelector,
@@ -34,6 +35,7 @@ import { PossibleFromFlight, PossibleToFlight } from './components/component.pos
         Header,
         CityComponent,
         DateComponent,
+        FlightsComponent,
         ControlsComponent
     ],
     imports: [

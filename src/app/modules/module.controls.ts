@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ShareData } from './../data/data.share.service';
+import { ConvertedData } from './../data/data.transform.service';
 
 @Component({
     selector: 'page-controls',
@@ -10,39 +11,46 @@ import { ShareData } from './../data/data.share.service';
     templateUrl: './../views/view.controls.module.html',
 })
 export class ControlsComponent {
-    public arrivalCodeSubscription: Subscription;
-    public arrivalDateSubscription: Subscription;
-    public departureCodeSubscription: Subscription;
-    public departureDateSubscription: Subscription;
+    private departureSubscription: Subscription;
+    private flightSubscription: Subscription;
+    private showFlightSubscription: Subscription;
+    private twoWayTicketSubscription: Subscription;
+    private isArrivalSelect: boolean = false;
+    private isFlightsReturned: boolean = false;
+    private showFlights: boolean = false;
+    private twoWayTicket: boolean = true;
 
-   private arrivalAirrort: string;
-    private arrivalDate: string;
-    private departureAirport: string;
-    private departureDate: string;
+    constructor(private shareData: ShareData, private convertedData: ConvertedData) {
+        this.departureSubscription = shareData.arrivalAirport.subscribe(
+            arrival => {
+                this.isArrivalSelect = true;
+        });
+        this.flightSubscription = shareData.directFlights.subscribe(
+            flights => {
+                this.isFlightsReturned = true;
+            }
+        );
+        this.showFlightSubscription = shareData.showFlights.subscribe(
+            state => {
+                this.showFlights = state;
+            }
+        );
+        this.twoWayTicketSubscription = shareData.twoWayTicket.subscribe(
+            state => {
+                this.twoWayTicket = state;
+            }
+        );
+    }
 
-    constructor(private shareData: ShareData) {
-        this.departureCodeSubscription = shareData.departureAirport.subscribe(
-            departure => {
-                this.departureAirport = departure.code;
-            });
-        this.arrivalCodeSubscription = shareData.arrivalAirport.subscribe(
-            arrival => {
-                this.arrivalAirrort = arrival.code;
-            });
-        /*
-        this.departureDateSubscription = shareData.arrivalSelected.subscribe(
-            arrival => {
-                this.departureDate = arrival.code;
-            });
-        this.arrivalDateSubscription = shareData.arrivalSelected.subscribe(
-            arrival => {
-                this.arrivalDate = arrival.code;
-            });
-        */
+    public updateSearch(state: boolean) {
+        this.shareData.updateParameters(state);
     }
 
     public searchFlights(event: Event) {
-        console.log(`Departure airport is ${this.departureAirport} with dates interval`);
-        console.log(`Arrival airport is ${this.arrivalAirrort} with dates interval`);
+        this.convertedData.getDirectFlights();
+        if (this.twoWayTicket) {
+            this.convertedData.getReturnFlights();
+        }
+        this.shareData.showFlightsSet(true);
     }
 }

@@ -1,5 +1,5 @@
 import '../../../public/css/styles.css';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ShareData } from './../data/data.share.service';
@@ -12,41 +12,39 @@ import { ArrivalDatepicker, DepartureDatepicker } from './../components/componen
     styleUrls: ['./../views/view.date.module.less'],
     templateUrl: './../views/view.date.module.html',
 })
-export class DateComponent implements AfterViewInit {
+export class DateComponent {
     @ViewChild(ArrivalDatepicker) public arrivalDate: ArrivalDatepicker;
     @ViewChild(DepartureDatepicker) public departureDate: DepartureDatepicker;
-    public subscription: Subscription;
 
+    private departureSubscription: Subscription;
+    private showFlightSubscription: Subscription;
+    private twoWayTicketSubscription: Subscription;
     private isArrivalSelect: boolean = false;
+    private showFlights: boolean = false;
     private twoWayTicket: boolean = true;
 
-    private gotFlights: boolean = false;
-    private possibleToFlights: Array<Ryanair.Flight>;
-    private possibleFromFlights: Array<Ryanair.Flight>;
-    private possibleRoutes: Array<{}> = [];
-    private possibleRoutesisShown: boolean = false;
-
     constructor(private convertedData: ConvertedData, private shareData: ShareData) {
-        this.subscription = shareData.arrivalAirport.subscribe(
+        this.departureSubscription = shareData.arrivalAirport.subscribe(
             arrival => {
                 this.isArrivalSelect = true;
             });
-        /*
-        this.shareData.departureDateSelect(this.departureDate.date);
-        this.shareData.departureDateSelect(this.arrivalDate.date);
-        */
+        this.showFlightSubscription = shareData.showFlights.subscribe(
+            state => {
+                this.showFlights = state;
+            }
+        );
+        this.twoWayTicketSubscription = shareData.twoWayTicket.subscribe(
+            state => {
+                this.twoWayTicket = state;
+            }
+        );
     }
 
-    public ngAfterViewInit() {
-        const date = this.departureDate;
-        console.log(date);
-        /*
-        console.log(date);
-        setTimeout(() => {
-            console.log(this.departureDate);
-        }, 1000);
-        */
-        // this.shareData.departureDateSelect(this.departureDate.date);
-        // this.shareData.departureDateSelect(this.arrivalDate.date);
+    public dateSelect(date: Date, isArrival: boolean) {
+        if (isArrival) {
+            this.shareData.arrivalDateSelect(date);
+        } else {
+            this.shareData.departureDateSelect(date);
+        }
     }
 }

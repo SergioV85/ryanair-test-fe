@@ -17,7 +17,7 @@ export class ApiData {
         this.ServerData = new AsyncSubject();
     }
 
-    public searchFlight(departure: string, arrival: string, departureDate: string, arrivalDate?: string) {
+    public searchFlight(departure: string, arrival: string, departureDate: string, arrivalDate?: string): Observable<{flights: Array<Ryanair.Flight>}> {
         return this.http
                 .get(`${this.flightUrl}/from/${departure}/to/${arrival}/${departureDate}/${arrivalDate}/250/unique/?limit=15&offset-0`)
                 .map(this.parseData)
