@@ -11,13 +11,14 @@ class Datepicker {
     };
     private opened: boolean = false;
 
-    constructor() {}
-
-    public get date(): {min: string, max: string} {
+    public get date(): any {
+        return this.dt && this.dt.getTime() || new Date().getTime();
+        /*
         return {
             max: moment(this.dt).add(3, 'd').format('YYYY-MM-DD'),
             min: moment(this.dt).subtract(3, 'd').format('YYYY-MM-DD'),
         };
+        */
     }
 
     public disabled(date: Date, mode: string): boolean {

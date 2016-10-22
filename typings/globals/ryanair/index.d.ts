@@ -42,6 +42,11 @@ declare namespace Ryanair {
         title: string;
     }
 
+    interface DateSelection {
+        max: string;
+        min: string;
+    }
+
     interface Country {
         code: string;
         currency: string;

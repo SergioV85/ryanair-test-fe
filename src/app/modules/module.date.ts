@@ -1,5 +1,5 @@
 import '../../../public/css/styles.css';
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ShareData } from './../data/data.share.service';
@@ -12,7 +12,7 @@ import { ArrivalDatepicker, DepartureDatepicker } from './../components/componen
     styleUrls: ['./../views/view.date.module.less'],
     templateUrl: './../views/view.date.module.html',
 })
-export class DateComponent {
+export class DateComponent implements AfterViewInit {
     @ViewChild(ArrivalDatepicker) public arrivalDate: ArrivalDatepicker;
     @ViewChild(DepartureDatepicker) public departureDate: DepartureDatepicker;
     public subscription: Subscription;
@@ -27,16 +27,26 @@ export class DateComponent {
     private possibleRoutesisShown: boolean = false;
 
     constructor(private convertedData: ConvertedData, private shareData: ShareData) {
-        this.subscription = shareData.arrivalSelected.subscribe(
+        this.subscription = shareData.arrivalAirport.subscribe(
             arrival => {
                 this.isArrivalSelect = true;
             });
+        /*
+        this.shareData.departureDateSelect(this.departureDate.date);
+        this.shareData.departureDateSelect(this.arrivalDate.date);
+        */
     }
 
-    public searchFlights(event: Event) {
-        const departureDates = this.departureDate.date;
-        const arrivalDates = this.arrivalDate.date;
-        console.log(departureDates);
-        console.log(arrivalDates);
+    public ngAfterViewInit() {
+        const date = this.departureDate;
+        console.log(date);
+        /*
+        console.log(date);
+        setTimeout(() => {
+            console.log(this.departureDate);
+        }, 1000);
+        */
+        // this.shareData.departureDateSelect(this.departureDate.date);
+        // this.shareData.departureDateSelect(this.arrivalDate.date);
     }
 }

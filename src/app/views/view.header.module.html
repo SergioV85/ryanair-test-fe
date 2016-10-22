@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" [ngClass]="{collapsed: isCollapsed}" (click)="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="./../../../public/images/logo.png">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Plan</a></li>
+                <li><a href="#">My Booking</a></li>
+                <li><a href="#">Check-In</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Sign up</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Info</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

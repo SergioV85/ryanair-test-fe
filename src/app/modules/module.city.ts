@@ -11,6 +11,7 @@ import { ConvertedData } from './../data/data.transform.service';
 })
 export class CityComponent {
     private isDepartureSelect: boolean = false;
+    private arrivalCity: string;
     private departureCity: string;
     private possibleRoutes: Array<{}> = [];
     private possibleRoutesisShown: boolean = false;
@@ -40,12 +41,13 @@ export class CityComponent {
     private citySelect(value: Ryanair.CityObject, isArrival: boolean) {
         if (isArrival) {
             this.updateRoutes();
-            this.shareData.arrivalSelect(value);
+            this.arrivalCity = value.name;
+            this.shareData.arrivalAirportSelect(value);
         } else {
             this.isDepartureSelect = true;
             this.departureCity = value.name;
             this.updateRoutes(value.code);
-            this.shareData.departureSelect(value);
+            this.shareData.departureAirportSelect(value);
         }
     }
 
