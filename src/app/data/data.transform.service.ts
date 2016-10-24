@@ -29,11 +29,11 @@ export class ConvertedData {
 
         this.departureCodeSubscription = shareData.departureAirport.subscribe(
             departure => {
-                this.departureAirport = departure.code;
+                this.departureAirport = departure !== null ? departure.code : null;
             });
         this.arrivalCodeSubscription = shareData.arrivalAirport.subscribe(
             arrival => {
-                this.arrivalAirrort = arrival.code;
+                this.arrivalAirrort = arrival !== null ? arrival.code : null;
             });
 
         this.departureDateSubscription = shareData.departureDate.subscribe(
@@ -56,7 +56,7 @@ export class ConvertedData {
         this.airports.searchFlight(this.departureAirport, this.arrivalAirrort, this.departureMinDate, this.departureMaxDate)
             .subscribe(
                 flights => {
-                    this.shareData.directFlightsSet(this.sortFlights(flights.flights));
+                    this.shareData.DirectFlights(this.sortFlights(flights.flights));
                 }
             );
     }
@@ -64,7 +64,7 @@ export class ConvertedData {
         this.airports.searchFlight(this.arrivalAirrort, this.departureAirport, this.arrivalMinDate, this.arrivalMaxDate)
             .subscribe(
                 flights => {
-                    this.shareData.returnFlightsSet(this.sortFlights(flights.flights));
+                    this.shareData.ReturnFlights(this.sortFlights(flights.flights));
                 }
             );
     }

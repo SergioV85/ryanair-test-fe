@@ -1,3 +1,12 @@
 <main>
-    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" (selectionDone)="changeDate($event)"></datepicker>
+    <h4 class="selected-interval">Selected interval for {{ datepickerType }} is <i>{{ minFlightDate }} - {{ maxFlightDate }}</i></h4>
+    <datepicker [(ngModel)]="dt" [minDate]="minDate" [startingDay]="1" [customClass]="customClass" (selectionDone)="changeDate($event)"></datepicker>
+    <div class="date-interval-container">
+        <div class="date-interval">
+            <label>Possbile day interval for {{ datepickerType }} date</label>
+            <md-input [(ngModel)]="dateInterval" type="number" align="end" (change)="updateDateInterval()">
+                <span md-suffix>days</span>
+            </md-input>
+        </div>
+    </div>
 </main>

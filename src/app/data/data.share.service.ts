@@ -5,14 +5,18 @@ import { Observable, Subject } from 'rxjs';
 export class ShareData {
     public arrivalAirport: Observable<Ryanair.CityObject>;
     public arrivalDate: Observable<Date>;
+    public arrivalDateLatest: Date;
+    public cleanSettings: Observable<boolean>;
     public departureAirport: Observable<Ryanair.CityObject>;
     public departureDate: Observable<Date>;
+    public departureDateLatest: Date;
     public directFlights: Observable<Array<Ryanair.Flight>>;
     public returnFlights: Observable<Array<Ryanair.Flight>>;
     public showFlights: Observable<boolean>;
     public twoWayTicket: Observable<boolean>;
     private arrivalAirportSource = new Subject<Ryanair.CityObject>();
     private arrivalDateSource = new Subject<Date>();
+    private cleanSettingsSource = new Subject<boolean>();
     private departureAirportSource = new Subject<Ryanair.CityObject>();
     private departureDateSource = new Subject<Date>();
     private directFlightsSource = new Subject<Array<Ryanair.Flight>>();
@@ -23,6 +27,7 @@ export class ShareData {
     constructor() {
         this.arrivalAirport = this.arrivalAirportSource.asObservable();
         this.arrivalDate = this.arrivalDateSource.asObservable();
+        this.cleanSettings = this.cleanSettingsSource.asObservable();
         this.departureAirport = this.departureAirportSource.asObservable();
         this.departureDate = this.departureDateSource.asObservable();
         this.directFlights = this.directFlightsSource.asObservable();
@@ -31,32 +36,46 @@ export class ShareData {
         this.twoWayTicket = this.twoWayTicketSource.asObservable();
     }
 
-    public arrivalAirportSelect(airport: Ryanair.CityObject) {
+    public ArrivalAirport(airport: Ryanair.CityObject) {
         this.arrivalAirportSource.next(airport);
     }
-    public arrivalDateSelect(date: Date) {
+    public ArrivalDate(date: Date) {
         this.arrivalDateSource.next(date);
+        this.arrivalDateLatest = date;
     }
-    public departureAirportSelect(airport: Ryanair.CityObject) {
+    public CleanSettings() {
+        this.cleanSettingsSource.next(true);
+    }
+    public DepartureAirport(airport: Ryanair.CityObject) {
         this.departureAirportSource.next(airport);
     }
-    public departureDateSelect(date: Date) {
+    public DepartureDate(date: Date) {
         this.departureDateSource.next(date);
+        this.departureDateLatest = date;
     }
-    public directFlightsSet(flights: Array<Ryanair.Flight>) {
+    public DirectFlights(flights: Array<Ryanair.Flight>) {
         this.directFlightsSource.next(flights);
     }
-    public returnFlightsSet(flights: Array<Ryanair.Flight>) {
+    public get LatestArrivalDate(): Date {
+        return this.arrivalDateLatest;
+    }
+    public get LatestDeparturelDate(): Date {
+        return this.departureDateLatest;
+    }
+    public ReturnFlights(flights: Array<Ryanair.Flight>) {
         this.returnFlightsSource.next(flights);
     }
-    public showFlightsSet(showFlights: boolean) {
+    public ShowFlights(showFlights: boolean) {
         this.showFlightsSource.next(showFlights);
     }
-    public twoWayChange(state: boolean) {
+    public TwoWayChange(state: boolean) {
         this.twoWayTicketSource.next(state);
     }
-    public updateParameters(cleanSettings: boolean) {
-        this.showFlightsSet(false);
+    public UpdateParameters(cleanSettings: boolean) {
+        this.ShowFlights(false);
+        if (cleanSettings) {
+            this.CleanSettings();
+        }
         this.directFlightsSource.next([]);
         this.returnFlightsSource.next([]);
     }

@@ -1,19 +1,19 @@
-<div class="flight row">
-    <div class="col-lg-9">
+<div class="flight row" [ngClass]="{selectedFlight: selectedFlight}" (click)="flightSelected()">
+    <div class="col-lg-8">
         <div class="flight-departure">
             <span class="label">Departure Date</span>
             <span class="date">{{ getDate(flight.dateFrom) }}</span>
             <span class="label">Departure Time</span>
-            <span class="time">{{ getTime(flight.dateFrom) }}</span>            
+            <span class="time">{{ getTime(flight.dateFrom) }}</span>
         </div>
         <div class="flight-arrival">
             <span class="label">Arrival Date</span>
             <span class="date">{{ getDate(flight.dateTo) }}</span>
             <span class="label">Arrival Time</span>
-            <span class="time">{{ getTime(flight.dateTo) }}</span>                
+            <span class="time">{{ getTime(flight.dateTo) }}</span>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="flight-price">
             <span>{{ flight.currency }}</span>
             <span>{{ flight.price.toFixed(2) }}</span>

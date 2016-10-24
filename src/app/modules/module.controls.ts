@@ -23,7 +23,7 @@ export class ControlsComponent {
     constructor(private shareData: ShareData, private convertedData: ConvertedData) {
         this.departureSubscription = shareData.arrivalAirport.subscribe(
             arrival => {
-                this.isArrivalSelect = true;
+                this.isArrivalSelect = arrival !== null;
         });
         this.flightSubscription = shareData.directFlights.subscribe(
             flights => {
@@ -43,7 +43,7 @@ export class ControlsComponent {
     }
 
     public updateSearch(state: boolean) {
-        this.shareData.updateParameters(state);
+        this.shareData.UpdateParameters(state);
     }
 
     public searchFlights(event: Event) {
@@ -51,6 +51,6 @@ export class ControlsComponent {
         if (this.twoWayTicket) {
             this.convertedData.getReturnFlights();
         }
-        this.shareData.showFlightsSet(true);
+        this.shareData.ShowFlights(true);
     }
 }

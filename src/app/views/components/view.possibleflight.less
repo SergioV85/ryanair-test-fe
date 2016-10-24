@@ -1,9 +1,5 @@
 @import "./../../../../public/css/variables";
 
-.possible-flights-flight {
-    
-}
-
 .flight {
     background-color: @lightColor;
     border-radius: 10px;
@@ -29,14 +25,18 @@
     }
 
     &-price {
-        color: @alternativeColor;        
-        font-size: @xxlargeFontSize;
+        color: @alternativeColor;
+        font-size: @xlargeFontSize;
         line-height: 50px;
         padding-right: 10px;
         text-align: right;
     }
 
     &:hover {
+        background-color: darken(@lightColor, 10);
+    }
+
+    &.selectedFlight {
         background-color: @alternativeColor;
         color: @baseColor;
 
@@ -47,6 +47,6 @@
 
         .flight-price {
             color: @baseColor;   
-        }
-    }    
+        } 
+    }
 }

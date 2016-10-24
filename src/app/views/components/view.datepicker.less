@@ -1,11 +1,37 @@
-.full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
+@import "../../../../public/css/variables";
+
+datepicker {
+    .well {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    daypicker {
+        display: inline-block;
+    }
 }
 
-.partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
+.selected-interval {
+    color: @textBlue;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.date-interval {
+    display: inline-block;
+
+    &-container {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+date-interval-container
+
+label {
+    color: #aaa;
+    font-weight: 300;
 }

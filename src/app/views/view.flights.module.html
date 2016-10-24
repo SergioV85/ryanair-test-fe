@@ -1,10 +1,28 @@
-<possible-to-flights *ngIf="showFlights" class="possible-flights">
-    <h4 class="possible-flights-title"> Found next flight from {{ departureAirport }} to {{ arrivalAirport }}</h4>
-    <possible-to-flight *ngFor="let flight of possibleToFlights" class="possible-flights-flight" [flight]=flight>
-    </possible-to-flight>
-</possible-to-flights>
-<possible-from-flights *ngIf="showFlights && twoWayTicket" class="possible-flights">
-    <h4 class="possible-flights-title"> Found next flight from {{ arrivalAirport }} to {{ departureAirport }}</h4>
-    <possible-from-flight *ngFor="let flight of possibleFromFlights" class="possible-flights-flight" [flight]=flight>
-    </possible-from-flight>
-</possible-from-flights>
+<div class="flight-selector">
+    <div class="row" *ngIf="showFlights">
+        <div class="col-xs-12" [ngClass]="{'col-lg-6': twoWayTicket, 'col-lg-12': !twoWayTicket}">
+            <possible-to-flights class="possible-flights">
+                <h4 *ngIf="!showDirectEmptyMessage" class="possible-flights-title"> Found next flights from {{ departureAirport }} to {{ arrivalAirport }}</h4>
+                <possible-to-flight *ngFor="let flight of possibleToFlights; let index=index" class="possible-flights-flight" [flight]=flight (departureFlight)="directFlightSelected(index, flight)">
+                </possible-to-flight>
+                <h4 *ngIf="showDirectEmptyMessage" class="possible-flights-empty">Sorry, no flights found between {{ departureAirport }} and {{ arrivalAirport }}. Try to change departure date and try again.</h4>
+            </possible-to-flights>
+        </div>
+        <div class="col-xs-12 col-lg-6" *ngIf="twoWayTicket">
+            <possible-from-flights class="possible-flights">
+                <h4 *ngIf="!showReturnEmptyMessage" class="possible-flights-title"> Found next flights from {{ arrivalAirport }} to {{ departureAirport }}</h4>
+                <possible-from-flight *ngFor="let flight of possibleFromFlights; let index=index" class="possible-flights-flight" [flight]=flight (returnFlight)="returnFlightSelected(index, flight)">
+                </possible-from-flight>
+                <h4 *ngIf="showReturnEmptyMessage" class="possible-flights-empty">Sorry, no flights found between {{ arrivalAirport }} and {{ departureAirport }}. Try to change return date and try again.</h4>
+            </possible-from-flights>
+        </div>
+        <div class="col-xs-12" *ngIf="totalPrice !== '0'">
+            <h4 class="total-price" *ngIf="twoWayTicket">
+                Total price for tickets {{ departureAirport }} - {{ arrivalAirport }} - {{ departureAirport }} is <span class="total-price-price">{{ totalPrice }}</span>
+            </h4>
+            <h4 class="total-price" *ngIf="!twoWayTicket">
+                Total price for tickets {{ departureAirport }} - {{ arrivalAirport }} is <span class="total-price-price">{{ totalPrice }}</span>
+            </h4>
+        </div>
+    </div>
+</div>

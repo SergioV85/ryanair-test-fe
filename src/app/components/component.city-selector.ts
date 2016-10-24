@@ -4,7 +4,8 @@ import { CompleterData, CompleterService } from 'ng2-completer';
 import { ConvertedData } from './../data/data.transform.service';
 
 class CitySelector implements OnInit {
-    public selectedCity: string;
+    public selectedCity: Ryanair.CitySelection;
+    public highlightedCity: Ryanair.CitySelection;
     public title: string;
     public dataService: CompleterData;
     public inputDisabled: boolean;
@@ -19,6 +20,9 @@ class CitySelector implements OnInit {
                 this.dataService = this.completerService.local(this.cities, 'name', 'name');
             }
         );
+    }
+    public highlighted($event: any) {
+        this.highlightedCity = $event;
     }
 }
 
@@ -36,6 +40,9 @@ export class DepartureSelector extends CitySelector {
         super(convertedData, completerService);
         this.inputDisabled = false;
         this.title = 'Departure airport';
+    }
+    public blur($event: any) {
+        this.onChange.emit(this.highlightedCity);
     }
     public selectCity(value: Ryanair.CitySelection) {
         this.onChange.emit(value);
@@ -56,6 +63,9 @@ export class ArrivalSelector extends CitySelector {
     constructor(public convertedData: ConvertedData, public completerService: CompleterService) {
         super(convertedData, completerService);
         this.title = 'Arrival Airport';
+    }
+    public blur($event: any) {
+        this.onChange.emit(this.highlightedCity);
     }
     public selectCity(value: Ryanair.CitySelection) {
         this.onChange.emit(value);

@@ -1,14 +1,15 @@
 <main>
     <h4 class="airport-selector-title">{{ title }}</h4>
-    <!--input [(ngModel)]="selectedCity" auto-complete [source]="cities" value-property-name="code" display-property-name="name" (valueChanged)="selectCity($event)" /-->
     <ng2-completer 
         [(ngModel)]="selectedCity" 
         [dataService]="dataService" 
         [minSearchLength]="0" 
         (selected)="selectCity($event)"
         [disableInput]="inputDisabled" 
-        [autoMatch]="true" 
+        [autoMatch]="false" 
         [inputName]="airport-selector"
-        placeholder="Select airport">
+        placeholder="Select airport"
+        (blur)="blur()"
+        (highlighted)="highlighted($event)">
     </ng2-completer>
 </main>

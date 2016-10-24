@@ -16,6 +16,7 @@ export class DateComponent {
     @ViewChild(ArrivalDatepicker) public arrivalDate: ArrivalDatepicker;
     @ViewChild(DepartureDatepicker) public departureDate: DepartureDatepicker;
 
+    private cleanSettingsSubscription: Subscription;
     private departureSubscription: Subscription;
     private showFlightSubscription: Subscription;
     private twoWayTicketSubscription: Subscription;
@@ -26,7 +27,7 @@ export class DateComponent {
     constructor(private convertedData: ConvertedData, private shareData: ShareData) {
         this.departureSubscription = shareData.arrivalAirport.subscribe(
             arrival => {
-                this.isArrivalSelect = true;
+                this.isArrivalSelect = arrival !== null;
             });
         this.showFlightSubscription = shareData.showFlights.subscribe(
             state => {
@@ -38,13 +39,25 @@ export class DateComponent {
                 this.twoWayTicket = state;
             }
         );
+        this.cleanSettingsSubscription = shareData.cleanSettings.subscribe(
+            clean => {
+                this.shareData.ArrivalDate(null);
+                this.shareData.DepartureDate(null);
+            }
+        );
     }
 
     public dateSelect(date: Date, isArrival: boolean) {
         if (isArrival) {
-            this.shareData.arrivalDateSelect(date);
+            this.shareData.ArrivalDate(date);
         } else {
-            this.shareData.departureDateSelect(date);
+            this.shareData.DepartureDate(date);
+            this.setDate(date);
+        }
+    }
+    private setDate(date: Date) {
+        if (this.twoWayTicket) {
+            this.arrivalDate.setDate(date);
         }
     }
 }

@@ -1,12 +1,22 @@
 @import "../../../public/css/variables";
 
+.flight-selector {
+    margin: 10px auto 0;
+    width: 90%;
+}
+
 .possible-flights {
     display: block;
-    margin: 20px auto 0;
-    width: 90%;
+    margin: 10px auto 0;
+    width: 100%;
 
     &-title {
         color: @baseColor;
+        text-align: center;
+    }
+
+    &-empty {
+        color: @errorColor;
         text-align: center;
     }
 
@@ -16,5 +26,16 @@
             margin-top: 20px;
             margin-bottom: 30px;
         }
+    }
+}
+
+.total-price {
+    color: @textBlue;
+    font-size: @largeFontSize;
+    text-align: center;
+
+    &-price {
+        color: @baseColor;
+        font-weight: 600;
     }
 }

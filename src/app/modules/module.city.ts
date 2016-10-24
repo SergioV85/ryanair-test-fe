@@ -11,6 +11,7 @@ import { ConvertedData } from './../data/data.transform.service';
     templateUrl: './../views/view.city.module.html',
 })
 export class CityComponent {
+    private cleanSettingsSubscription: Subscription;
     private showFlightSubscription: Subscription;
     private isDepartureSelect: boolean = false;
     private showFlights: boolean = false;
@@ -26,11 +27,21 @@ export class CityComponent {
                 this.showFlights = state;
             }
         );
-
+        this.cleanSettingsSubscription = shareData.cleanSettings.subscribe(
+            clean => {
+                this.arrivalCity = null;
+                this.departureCity = null;
+                this.possibleRoutes = [];
+                this.possibleRoutesisShown = false;
+                this.shareData.DepartureAirport(null);
+                this.shareData.ArrivalAirport(null);
+                this.isDepartureSelect = false;
+            }
+        );
     }
     public changeFlightType(event: boolean) {
         this.twoWayTicket = event.toString();
-        this.shareData.twoWayChange(event);
+        this.shareData.TwoWayChange(event);
     }
     public directSelect(value: Ryanair.CityObject) {
         this.citySelect(value, true);
@@ -50,17 +61,16 @@ export class CityComponent {
             }
         }
     }
-
     private citySelect(value: Ryanair.CityObject, isArrival: boolean) {
         if (isArrival) {
             this.updateRoutes();
             this.arrivalCity = value.name;
-            this.shareData.arrivalAirportSelect(value);
+            this.shareData.ArrivalAirport(value);
         } else {
             this.isDepartureSelect = true;
             this.departureCity = value.name;
             this.updateRoutes(value.code);
-            this.shareData.departureAirportSelect(value);
+            this.shareData.DepartureAirport(value);
         }
     }
     private updateRoutes(code?: string) {
