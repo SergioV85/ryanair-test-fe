@@ -8,7 +8,7 @@ class CitySelector implements OnInit {
     public highlightedCity: Ryanair.CitySelection;
     public title: string;
     public dataService: CompleterData;
-    public inputDisabled: boolean;
+    public inputDisabled: boolean = true;
     private cities: Array<Ryanair.CitySelection>;
 
     constructor(public convertedData: ConvertedData, public completerService: CompleterService) { }
@@ -18,9 +18,11 @@ class CitySelector implements OnInit {
             (data: Array<Ryanair.CitySelection>) => {
                 this.cities = data;
                 this.dataService = this.completerService.local(this.cities, 'name', 'name');
+                this.enableInput();
             }
         );
     }
+    public enableInput() {}
     public highlighted($event: any) {
         this.highlightedCity = $event;
     }
@@ -38,11 +40,13 @@ export class DepartureSelector extends CitySelector {
 
     constructor(public convertedData: ConvertedData, public completerService: CompleterService) {
         super(convertedData, completerService);
-        this.inputDisabled = false;
         this.title = 'Departure airport';
     }
     public blur($event: any) {
         this.onChange.emit(this.highlightedCity);
+    }
+    public enableInput() {
+        this.inputDisabled = false;
     }
     public selectCity(value: Ryanair.CitySelection) {
         this.onChange.emit(value);
@@ -67,6 +71,7 @@ export class ArrivalSelector extends CitySelector {
     public blur($event: any) {
         this.onChange.emit(this.highlightedCity);
     }
+    public enableInput() {}
     public selectCity(value: Ryanair.CitySelection) {
         this.onChange.emit(value);
     }

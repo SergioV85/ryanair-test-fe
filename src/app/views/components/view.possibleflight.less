@@ -22,14 +22,34 @@
 
     .date {
         margin-right: 20px;
+
+        @media all and (max-width: 960px) {
+            margin-right: 10px;
+        }
+    }
+
+    &-time {
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 10px;
+        width: calc(~'66% - 10px');
     }
 
     &-price {
+        box-sizing: border-box;
         color: @alternativeColor;
+        display: inline-block;
         font-size: @xlargeFontSize;
-        line-height: 50px;
         padding-right: 10px;
+        padding: 0 10px;
         text-align: right;
+        vertical-align: middle;
+        width: 33%;
+
+        @media all and (max-width: 960px) {
+            font-size: @mobile-xlargeFontSize;
+        }        
     }
 
     &:hover {

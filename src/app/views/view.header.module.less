@@ -20,6 +20,10 @@
             a {
                 color: @alternativeColor;
                 font-size: @largeFontSize;
+
+                @media all and (max-width: 960px) {
+                    font-size: @mobile-largeFontSize;
+                }
             }
         }
     }
