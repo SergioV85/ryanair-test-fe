@@ -9,3 +9,5 @@ Installation:
 
 ## Installation
 1. Install node packages using command "npm install" in project root folder
+2. Run website using command "npm start" in project root folder.
+3. Wait for status "webpack: bundle is now VALID." and open web page "http://localhost:8080" 
